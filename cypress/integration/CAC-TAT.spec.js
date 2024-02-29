@@ -31,4 +31,22 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
     cy.get('.success').should('be.visible')
   })
+
+  // passando um objeto de configuração para o type.
+  it('preenche os campos obrigatórios e envia o formulário', function () {
+    cy.get('input[id="firstName"]').type('John')
+    cy.get('input[id="lastName"]').type('Doe')
+    cy.get('input[id="email"]').type('john-doe@example.com', { delay: 100 })
+    cy.get('textarea[id="open-text-area"]').type(
+      'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. ',
+      { delay: 0 },
+    )
+
+    // opção para selecionar o elemento
+    // cy.get('#firstName').type('Doe')
+
+    cy.get('button[type="submit"]').click()
+
+    cy.get('.success').should('be.visible')
+  })
 })
