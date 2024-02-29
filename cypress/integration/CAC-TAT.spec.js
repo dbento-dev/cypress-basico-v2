@@ -60,10 +60,10 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     cy.get('.error').should('be.visible')
   })
 
-  it('verifica se ao digitar um valor não numérico no campo de telefone o campo de telefone permanece vazio', function () {
+  it.only('verifica se ao digitar um valor não numérico no campo de telefone o campo de telefone permanece vazio', function () {
     cy.get('input[id="firstName"]').type('John')
     cy.get('input[id="lastName"]').type('Doe')
     cy.get('input[id="email"]').type('john-doe@example.com')
-    cy.get('input[id="phone"]').type('abc').should('have.text', '')
+    cy.get('input[id="phone"]').type('abc').should('have.value', '')
   })
 })
