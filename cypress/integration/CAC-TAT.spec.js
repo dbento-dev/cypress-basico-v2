@@ -41,12 +41,29 @@ describe('Central de Atendimento ao Cliente TAT', function () {
       'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. ',
       { delay: 0 },
     )
-
     // opção para selecionar o elemento
     // cy.get('#firstName').type('Doe')
 
     cy.get('button[type="submit"]').click()
 
     cy.get('.success').should('be.visible')
+  })
+
+  it('exibe mensagem de erro ao submeter o formulário com um e-mail com o formato inválida', function () {
+    cy.get('input[id="firstName"]').type('John')
+    cy.get('input[id="lastName"]').type('Doe')
+    cy.get('input[id="email"]').type('john.doe@example')
+    cy.get('textarea[id="open-text-area"]').type('Lorem ipsum dolor sit amet.')
+
+    cy.get('button[type="submit"]').click()
+
+    cy.get('.error').should('be.visible')
+  })
+
+  it('verifica se ao digitar um valor não numérico no campo de telefone o campo de telefone permanece vazio', function () {
+    cy.get('input[id="firstName"]').type('John')
+    cy.get('input[id="lastName"]').type('Doe')
+    cy.get('input[id="email"]').type('john-doe@example.com')
+    cy.get('input[id="phone"]').type('abc').should('have.text', '')
   })
 })
