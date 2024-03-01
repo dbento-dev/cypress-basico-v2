@@ -27,7 +27,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     // opção para selecionar o elemento
     // cy.get('#firstName').type('Doe')
 
-    cy.get('button[type="submit"]').click()
+    cy.contains('button', 'Enviar').click()
 
     cy.get('.success').should('be.visible')
   })
@@ -44,7 +44,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     // opção para selecionar o elemento
     // cy.get('#firstName').type('Doe')
 
-    cy.get('button[type="submit"]').click()
+    cy.contains('button', 'Enviar').click()
 
     cy.get('.success').should('be.visible')
   })
@@ -55,7 +55,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     cy.get('input[id="email"]').type('john.doe@example')
     cy.get('textarea[id="open-text-area"]').type('Lorem ipsum dolor sit amet.')
 
-    cy.get('button[type="submit"]').click()
+    cy.contains('button', 'Enviar').click()
 
     cy.get('.error').should('be.visible')
   })
@@ -74,7 +74,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     cy.get('#phone-checkbox').check()
     cy.get('#open-text-area').type('Lorem ipsum dolor sit amet.')
 
-    cy.get('button[type="submit"]').click()
+    cy.contains('button', 'Enviar').click()
 
     cy.get('.error').should('be.visible')
   })
@@ -103,11 +103,11 @@ describe('Central de Atendimento ao Cliente TAT', function () {
   })
 
   it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function () {
-    cy.get('button[type="submit"]').click()
+    cy.contains('button', 'Enviar').click()
     cy.get('.error').should('be.visible')
   })
 
-  it.only('envia o formulário com sucesso usando um comando customizado', function () {
+  it('envia o formulário com sucesso usando um comando customizado', function () {
     cy.fillMandatoryFieldsAndSubmit()
 
     cy.get('.success').should('be.visible')
