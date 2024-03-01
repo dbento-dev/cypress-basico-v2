@@ -60,10 +60,45 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     cy.get('.error').should('be.visible')
   })
 
-  it.only('verifica se ao digitar um valor não numérico no campo de telefone o campo de telefone permanece vazio', function () {
+  it('verifica se ao digitar um valor não numérico no campo de telefone o campo de telefone permanece vazio', function () {
     cy.get('input[id="firstName"]').type('John')
     cy.get('input[id="lastName"]').type('Doe')
     cy.get('input[id="email"]').type('john-doe@example.com')
     cy.get('input[id="phone"]').type('abc').should('have.value', '')
+  })
+
+  it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function () {
+    cy.get('#firstName').type('John')
+    cy.get('#lastName').type('Doe')
+    cy.get('#email').type('john-doe@example.com')
+    cy.get('#phone-checkbox').check()
+    cy.get('#open-text-area').type('Lorem ipsum dolor sit amet.')
+
+    cy.get('button[type="submit"]').click()
+
+    cy.get('.error').should('be.visible')
+  })
+
+  it('preenche e limpa os campos nome, sobrenome, email e telefone', function () {
+    cy.get('#firstName')
+      .type('John')
+      .should('have.value', 'John')
+      .clear()
+      .should('have.value', '')
+    cy.get('#lastName')
+      .type('Doe')
+      .should('have.value', 'Doe')
+      .clear()
+      .should('have.value', '')
+    cy.get('#email')
+      .type('john-doe@example.com')
+      .should('have.value', 'john-doe@example.com')
+      .clear()
+      .should('have.value', '')
+    cy.get('#phone')
+      .type('123456789')
+      .should('have.value', '123456789')
+      .clear()
+      .should('have.value', '')
   })
 })
