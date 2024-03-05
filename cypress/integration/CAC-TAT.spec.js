@@ -170,6 +170,5 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
     cy.contains('button', 'Enviar').click()
     cy.get('.error').should('be.visible')
-    
   })
 })
