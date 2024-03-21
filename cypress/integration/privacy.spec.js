@@ -1,7 +1,15 @@
 /// <reference types="Cypress" />
 
-it('testa a página da política de privacidade de forma independente', function () {
-  cy.visit('../../src/privacy.html')
+// it('testa a página da política de privacidade de forma independente', function () {
+//   cy.visit('../../src/privacy.html')
 
-  cy.contains('CAC TAT - Política de privacidade').should('be.visible')
+//   cy.contains('CAC TAT - Política de privacidade').should('be.visible')
+// })
+
+Cypress._.times(5, () => {
+  it('testa a página da política de privacidade de forma independente', function () {
+    cy.visit('../../src/privacy.html')
+
+    cy.contains('CAC TAT - Política de privacidade').should('be.visible')
+  })
 })
