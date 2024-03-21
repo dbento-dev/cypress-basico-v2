@@ -21,6 +21,8 @@ describe('Central de Atendimento ao Cliente TAT', function () {
   })
 
   it('preenche os campos obrigatórios e envia o formulário', function () {
+    cy.clock()
+
     cy.get('input[id="firstName"]').type('John')
     cy.get('input[id="lastName"]').type('Doe')
     cy.get('input[id="email"]').type('john-doe@example.com')
@@ -32,10 +34,16 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     cy.contains('button', 'Enviar').click()
 
     cy.get('.success').should('be.visible')
+
+    cy.tick(threeSecondsInMs)
+
+    cy.get('.success').should('not.be.visible')
   })
 
   // passando um objeto de configuração para o type.
   it('preenche os campos obrigatórios e envia o formulário', function () {
+    cy.clock()
+
     cy.get('input[id="firstName"]').type('John')
     cy.get('input[id="lastName"]').type('Doe')
     cy.get('input[id="email"]').type('john-doe@example.com', { delay: 100 })
@@ -49,9 +57,15 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     cy.contains('button', 'Enviar').click()
 
     cy.get('.success').should('be.visible')
+
+    cy.tick(threeSecondsInMs)
+
+    cy.get('.success').should('not.be.visible')
   })
 
   it('exibe mensagem de erro ao submeter o formulário com um e-mail com o formato inválida', function () {
+    cy.clock()
+
     cy.get('input[id="firstName"]').type('John')
     cy.get('input[id="lastName"]').type('Doe')
     cy.get('input[id="email"]').type('john.doe@example')
@@ -60,6 +74,10 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     cy.contains('button', 'Enviar').click()
 
     cy.get('.error').should('be.visible')
+
+    cy.tick(threeSecondsInMs)
+
+    cy.get('.error').should('not.be.visible')
   })
 
   it('verifica se ao digitar um valor não numérico no campo de telefone o campo de telefone permanece vazio', function () {
@@ -70,6 +88,8 @@ describe('Central de Atendimento ao Cliente TAT', function () {
   })
 
   it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function () {
+    cy.clock()
+
     cy.get('#firstName').type('John')
     cy.get('#lastName').type('Doe')
     cy.get('#email').type('john-doe@example.com')
@@ -79,6 +99,10 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     cy.contains('button', 'Enviar').click()
 
     cy.get('.error').should('be.visible')
+
+    cy.tick(threeSecondsInMs)
+
+    cy.get('.error').should('not.be.visible')
   })
 
   it('preenche e limpa os campos nome, sobrenome, email e telefone', function () {
@@ -105,14 +129,26 @@ describe('Central de Atendimento ao Cliente TAT', function () {
   })
 
   it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function () {
+    cy.clock()
+
     cy.contains('button', 'Enviar').click()
     cy.get('.error').should('be.visible')
+
+    cy.tick(threeSecondsInMs)
+
+    cy.get('.error').should('not.be.visible')
   })
 
   it('envia o formulário com sucesso usando um comando customizado', function () {
+    cy.clock()
+
     cy.fillMandatoryFieldsAndSubmit()
 
     cy.get('.success').should('be.visible')
+
+    cy.tick(threeSecondsInMs)
+
+    cy.get('.success').should('not.be.visible')
   })
 
   it('seleciona um produto (YouTube) por seu texto', function () {
@@ -164,6 +200,8 @@ describe('Central de Atendimento ao Cliente TAT', function () {
   })
 
   it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function () {
+    cy.clock()
+
     cy.get('#firstName').type('John')
     cy.get('#lastName').type('Doe')
     cy.get('#email').type('john-doe@example.com')
@@ -172,6 +210,10 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
     cy.contains('button', 'Enviar').click()
     cy.get('.error').should('be.visible')
+
+    cy.tick(threeSecondsInMs)
+
+    cy.get('.error').should('not.be.visible')
   })
 
   it('seleciona um arquivo da pasta fixtures', function () {
@@ -219,7 +261,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     cy.contains('CAC TAT - Política de privacidade').should('be.visible') // verifica se o texto está contido na pagina aberta após o click
   })
 
-  it.only('exibe mensagem por 3 segundos sem esperar 3 segundos no relógio "normal"', function () {
+  it('exibe mensagem por 3 segundos sem esperar 3 segundos no relógio "normal"', function () {
     cy.clock() // congela o relógio do navegador
 
     cy.fillMandatoryFieldsAndSubmit() // ação que dispara algo que exibe uma mensagem por três segundos
