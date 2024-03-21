@@ -8,6 +8,8 @@
 /// <reference types="Cypress" />
 
 describe('Central de Atendimento ao Cliente TAT', function () {
+  const threeSecondsInMs = 3000
+
   beforeEach(() => {
     // root-level hook
     // runs before every test block
@@ -224,7 +226,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
     cy.get('.success').should('be.visible') // verificação de que a mensagem está visível
 
-    cy.tick(3000) // avança o relógio três segundos (em milissegundos). Avanço este tempo para não perdê-lo esperando.
+    cy.tick(threeSecondsInMs) // avança o relógio três segundos (em milissegundos). Avanço este tempo para não perdê-lo esperando.
 
     cy.get('.success').should('not.be.visible') // verificação de que a mensagem não está mais visível
   })
