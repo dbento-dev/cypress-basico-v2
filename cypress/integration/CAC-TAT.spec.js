@@ -216,4 +216,16 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
     cy.contains('CAC TAT - Política de privacidade').should('be.visible') // verifica se o texto está contido na pagina aberta após o click
   })
+
+  it.only('exibe mensagem por 3 segundos sem esperar 3 segundos no relógio "normal"', function () {
+    cy.clock() // congela o relógio do navegador
+
+    cy.fillMandatoryFieldsAndSubmit() // ação que dispara algo que exibe uma mensagem por três segundos
+
+    cy.get('.success').should('be.visible') // verificação de que a mensagem está visível
+
+    cy.tick(3000) // avança o relógio três segundos (em milissegundos). Avanço este tempo para não perdê-lo esperando.
+
+    cy.get('.success').should('not.be.visible') // verificação de que a mensagem não está mais visível
+  })
 })
